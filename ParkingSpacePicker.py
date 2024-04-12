@@ -4,7 +4,13 @@ import pickle
 
 
 width, height = 107, 48
-posList = []
+try:
+
+    with open('CarParkPos','rb') as fin:
+        posList = pickle.load(fin)
+except:
+
+    posList = []
 
 
 def mouseClick(event, x, y, flags, params):
@@ -16,6 +22,9 @@ def mouseClick(event, x, y, flags, params):
             x1, y1 = pos
             if x1 < x < x1 + width and y1 < y < y1+ height:
                 posList.pop(i)
+
+    with open('CarParkPos','wb') as fout:
+        pickle.dump(posList,fout)
 
 
 
